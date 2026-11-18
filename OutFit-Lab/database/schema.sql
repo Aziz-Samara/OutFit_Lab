@@ -1,0 +1,38 @@
+CREATE DATABASE IF NOT EXISTS outfit_lab CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE outfit_lab;
+
+CREATE TABLE users (
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE clothing_items (
+  item_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  item_name VARCHAR(100) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  color VARCHAR(50) NOT NULL,
+  season VARCHAR(20) NOT NULL,
+  image VARCHAR(255) NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE outfits (
+  outfit_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  outfit_name VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  is_favorite TINYINT(1) NOT NULL DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE outfit_items (
+  outfit_item_id INT AUTO_INCREMENT PRIMARY KEY,
+  outfit_id INT NOT NULL,
+  item_id INT NOT NULL,
+  FOREIGN KEY (outfit_id) REFERENCES outfits(outfit_id) ON DELETE CASCADE,
+  FOREIGN KEY (item_id) REFERENCES clothing_items(item_id) ON DELETE CASCADE
+);

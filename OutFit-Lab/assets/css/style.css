@@ -1,0 +1,5 @@
+:root{--pink:#FF3D8B;--violet:#7B5CFF;--teal:#00B3A9;--ink:#2B1055}
+body{margin:0;font-family:Calibri,Arial,sans-serif;background:#FBF4FF;color:var(--ink)}
+.hero{min-height:100vh;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:1rem}
+.hero img{max-width:100%;height:auto}
+.btn{background:var(--pink);color:#fff;padding:.7rem 1.6rem;border-radius:999px;text-decoration:none;font-weight:bold}
